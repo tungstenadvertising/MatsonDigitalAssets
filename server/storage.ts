@@ -85,7 +85,7 @@ export class MemStorage implements IStorage {
 
     assets.forEach(asset => {
       const id = this.currentAssetId++;
-      const digitalAsset: DigitalAsset = { ...asset, id, isActive: true };
+      const digitalAsset: DigitalAsset = { ...asset, id, isActive: true, category: asset.category || "logistics" };
       this.digitalAssets.set(id, digitalAsset);
     });
   }
@@ -117,7 +117,7 @@ export class MemStorage implements IStorage {
 
   async createDigitalAsset(insertAsset: InsertDigitalAsset): Promise<DigitalAsset> {
     const id = this.currentAssetId++;
-    const asset: DigitalAsset = { ...insertAsset, id, isActive: true };
+    const asset: DigitalAsset = { ...insertAsset, id, isActive: true, category: insertAsset.category || "logistics" };
     this.digitalAssets.set(id, asset);
     return asset;
   }

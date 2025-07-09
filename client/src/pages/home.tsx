@@ -98,7 +98,7 @@ export default function Home() {
             PowerPoint Presentation Assets
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl">
-            Access and download professional digital assets for your PowerPoint presentations. 
+            Access and download digital assets for your PowerPoint presentations. 
             These standardized graphics ensure consistent branding across all Matson Logistics 
             internal communications and presentations.
           </p>
@@ -137,24 +137,7 @@ export default function Home() {
           ))}
         </div>
 
-        {/* Usage Guidelines */}
-        <div className="mt-12 bg-blue-50 rounded-lg p-6">
-          <h3 className="text-lg font-semibold corporate-navy mb-3">Usage Guidelines</h3>
-          <ul className="space-y-2 text-gray-700">
-            <li className="flex items-start space-x-2">
-              <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <span>These assets are optimized for PowerPoint presentations and maintain quality at various sizes</span>
-            </li>
-            <li className="flex items-start space-x-2">
-              <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <span>All graphics follow Matson Logistics brand standards and color guidelines</span>
-            </li>
-            <li className="flex items-start space-x-2">
-              <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <span>For questions about additional assets or customization, contact the Brand Team</span>
-            </li>
-          </ul>
-        </div>
+
       </main>
       
       <Footer />

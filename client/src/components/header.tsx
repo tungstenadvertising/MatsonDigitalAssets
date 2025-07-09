@@ -1,4 +1,5 @@
 import { User } from "lucide-react";
+import tungstenLogo from "@assets/34B7050F-55F6-49E6-BD15-89FEADEC88A1_1_105_c_1752025243605.jpeg";
 
 export default function Header() {
   return (
@@ -8,22 +9,18 @@ export default function Header() {
           {/* Logo Section */}
           <div className="flex items-center">
             <div className="flex-shrink-0">
-              <div className="bg-corporate-navy text-white px-4 py-2 rounded font-bold text-lg">
-                TUNGSTEN
-              </div>
+              <img 
+                src={tungstenLogo} 
+                alt="TUNGSTEN" 
+                className="h-10 w-auto object-contain"
+              />
             </div>
-            <div className="ml-4">
-              <h1 className="text-xl font-semibold corporate-navy">
-                Digital Asset Library
-              </h1>
-            </div>
+
           </div>
           
           {/* User Info */}
           <div className="flex items-center space-x-4">
-            <span className="text-sm text-gray-600">
-              Matson Logistics Staff Portal
-            </span>
+
             <User className="w-5 h-5 professional-blue" />
           </div>
         </div>
