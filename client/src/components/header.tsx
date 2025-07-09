@@ -12,7 +12,7 @@ export default function Header() {
               <img 
                 src={tungstenLogo} 
                 alt="TUNGSTEN" 
-                className="h-30 w-auto object-contain"
+                className="h-32 w-auto object-contain"
               />
             </div>
 
