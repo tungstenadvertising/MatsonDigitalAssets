@@ -23,9 +23,7 @@ export default function Header() {
               PowerPoint Presentation Assets
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Access and download digital assets for your PowerPoint presentations. 
-              These standardized graphics ensure consistent branding across all Matson Logistics 
-              internal communications and presentations.
+              These standardized graphics ensure consistent branding across all Matson Logistics internal communications and presentations.
             </p>
           </div>
 
