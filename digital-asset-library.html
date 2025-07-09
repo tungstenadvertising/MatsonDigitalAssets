@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matson Logistics - Digital Asset Library</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'corporate-navy': 'hsl(207, 100%, 20%)',
+                        'professional-blue': 'hsl(207, 90%, 54%)',
+                        'clean-white': 'hsl(210, 20%, 98%)',
+                        'dark-grey': 'hsl(210, 22%, 30%)',
+                        'action-blue': 'hsl(186, 78%, 39%)',
+                        'download-green': 'hsl(134, 61%, 41%)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+        }
+        
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 16px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .toast.show {
+            transform: translateX(0);
+        }
+        
+        .spinner {
+            border: 2px solid #f3f4f6;
+            border-top: 2px solid #3b82f6;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-clean-white">
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-32">
+                <!-- Logo Section -->
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <div class="bg-corporate-navy text-white px-6 py-3 rounded font-bold text-2xl">
+                            TUNGSTEN
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Title and Description -->
+                <div class="flex-1 text-center ml-8">
+                    <h2 class="text-3xl font-bold text-corporate-navy mb-2">
+                        PowerPoint Presentation Assets
+                    </h2>
+                    <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                        These standardized graphics ensure consistent branding across all Matson Logistics internal communications and presentations.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Download All Button -->
+        <div class="mb-8">
+            <button 
+                id="downloadAllBtn"
+                class="bg-download-green hover:bg-green-600 text-white font-medium px-6 py-3 rounded shadow-md transition-colors duration-200"
+                onclick="downloadAll()"
+            >
+                <span id="downloadAllText">
+                    <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    </svg>
+                    Download All Assets
+                </span>
+            </button>
+        </div>
+
+        <!-- Assets Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8" id="assetsGrid">
+            <!-- Assets will be populated by JavaScript -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-corporate-navy text-white mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="flex items-center justify-between">
+                <div>
+                    <div class="font-bold text-lg mb-2">TUNGSTEN</div>
+                    <p class="text-blue-200">Matson Logistics - Digital Asset Library</p>
+                </div>
+                <div class="text-right">
+                    <p class="text-blue-200 text-sm">
+                        © 2025 Matson Logistics. All rights reserved.
+                    </p>
+                    <p class="text-blue-200 text-sm">Internal Use Only</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Digital Assets Data
+        const digitalAssets = [
+            {
+                id: 1,
+                name: "Door Status Indicator",
+                description: "Visual indicator showing container door status with real-time monitoring capabilities. Perfect for operational dashboards and status reports.",
+                filename: "door-status.png",
+                fileFormat: "PNG",
+                dimensions: "1024x1024px",
+                iconName: "door-open",
+                category: "operational"
+            },
+            {
+                id: 2,
+                name: "Internal Temperature Monitor",
+                description: "Temperature monitoring system graphic for cold chain logistics presentations. Ideal for refrigerated cargo tracking slides.",
+                filename: "internal-temp.png",
+                fileFormat: "PNG",
+                dimensions: "1024x1024px",
+                iconName: "thermometer-half",
+                category: "monitoring"
+            },
+            {
+                id: 3,
+                name: "GPS Location Tracker",
+                description: "Real-time GPS tracking visualization for cargo location monitoring. Essential for supply chain visibility presentations.",
+                filename: "gps-location.png",
+                fileFormat: "PNG",
+                dimensions: "1024x1024px",
+                iconName: "map-marker-alt",
+                category: "tracking"
+            },
+            {
+                id: 4,
+                name: "Journey & Distance Tracker",
+                description: "Mileage and distance calculation display for route optimization presentations. Perfect for logistics efficiency reports.",
+                filename: "trip-mileage.png",
+                fileFormat: "PNG",
+                dimensions: "1024x1024px",
+                iconName: "route",
+                category: "optimization"
+            },
+            {
+                id: 5,
+                name: "Cargo Status Indicator",
+                description: "Load status visualization showing loaded or empty container states. Essential for capacity management presentations.",
+                filename: "cargo-status.png",
+                fileFormat: "PNG",
+                dimensions: "1024x1024px",
+                iconName: "boxes",
+                category: "capacity"
+            },
+            {
+                id: 6,
+                name: "Motion Alert System",
+                description: "Movement detection and alert system visualization for security and monitoring presentations. Ideal for safety protocol slides.",
+                filename: "motion-alert.png",
+                fileFormat: "PNG",
+                dimensions: "1024x1024px",
+                iconName: "exchange-alt",
+                category: "security"
+            }
+        ];
+
+        // Icon mapping
+        const iconMap = {
+            "door-open": `<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 13V9a4 4 0 118 0v4M3 17h18l-2 4H5l-2-4z"></path>
+            </svg>`,
+            "thermometer-half": `<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>`,
+            "map-marker-alt": `<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            </svg>`,
+            "route": `<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path>
+            </svg>`,
+            "boxes": `<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+            </svg>`,
+            "exchange-alt": `<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+            </svg>`
+        };
+
+        // Toast notification function
+        function showToast(title, message, type = 'success') {
+            const toast = document.createElement('div');
+            toast.className = `toast ${type === 'error' ? 'border-red-500' : 'border-green-500'}`;
+            toast.innerHTML = `
+                <div class="flex items-start">
+                    <div class="flex-shrink-0">
+                        <svg class="w-5 h-5 ${type === 'error' ? 'text-red-500' : 'text-green-500'}" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm font-medium text-gray-900">${title}</p>
+                        <p class="text-sm text-gray-500">${message}</p>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(toast);
+            setTimeout(() => toast.classList.add('show'), 100);
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => document.body.removeChild(toast), 300);
+            }, 3000);
+        }
+
+        // Download individual asset
+        function downloadAsset(assetId) {
+            const asset = digitalAssets.find(a => a.id === assetId);
+            if (!asset) return;
+
+            const button = document.getElementById(`download-${assetId}`);
+            const originalContent = button.innerHTML;
+            
+            // Show loading state
+            button.innerHTML = `
+                <div class="spinner inline-block mr-1"></div>
+                Downloading...
+            `;
+            button.disabled = true;
+
+            // Simulate download
+            setTimeout(() => {
+                // Show success state
+                button.innerHTML = `
+                    <svg class="w-4 h-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    Downloaded
+                `;
+                button.className = button.className.replace('bg-action-blue hover:bg-cyan-600', 'bg-download-green hover:bg-green-600');
+                
+                showToast('Download Complete', `${asset.name} has been downloaded successfully.`);
+                
+                // Reset button after 2 seconds
+                setTimeout(() => {
+                    button.innerHTML = originalContent;
+                    button.className = button.className.replace('bg-download-green hover:bg-green-600', 'bg-action-blue hover:bg-cyan-600');
+                    button.disabled = false;
+                }, 2000);
+            }, 1000);
+        }
+
+        // Download all assets
+        function downloadAll() {
+            const button = document.getElementById('downloadAllBtn');
+            const textElement = document.getElementById('downloadAllText');
+            
+            // Show loading state
+            textElement.innerHTML = `
+                <div class="spinner inline-block mr-2"></div>
+                Preparing Download...
+            `;
+            button.disabled = true;
+
+            // Simulate download
+            setTimeout(() => {
+                // Show success state
+                textElement.innerHTML = `
+                    <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    All Assets Downloaded
+                `;
+                
+                showToast('Download Complete', 'All digital assets have been downloaded successfully.');
+                
+                // Reset button after 2 seconds
+                setTimeout(() => {
+                    textElement.innerHTML = `
+                        <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                        Download All Assets
+                    `;
+                    button.disabled = false;
+                }, 2000);
+            }, 1500);
+        }
+
+        // Generate asset cards
+        function generateAssetCards() {
+            const grid = document.getElementById('assetsGrid');
+            
+            digitalAssets.forEach(asset => {
+                const card = document.createElement('div');
+                card.className = 'bg-white rounded-lg shadow-md border border-gray-200 p-6 hover:shadow-lg transition-shadow duration-200';
+                card.innerHTML = `
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0">
+                            <div class="w-24 h-24 bg-professional-blue rounded-lg flex items-center justify-center shadow-sm">
+                                ${iconMap[asset.iconName] || iconMap.boxes}
+                            </div>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-xl font-semibold text-corporate-navy mb-2">
+                                ${asset.name}
+                            </h3>
+                            <p class="text-gray-600 mb-4">
+                                ${asset.description}
+                            </p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-gray-500">
+                                    ${asset.fileFormat} Format • ${asset.dimensions}
+                                </span>
+                                <button
+                                    id="download-${asset.id}"
+                                    class="bg-action-blue hover:bg-cyan-600 text-white px-4 py-2 text-sm font-medium rounded transition-colors duration-200"
+                                    onclick="downloadAsset(${asset.id})"
+                                >
+                                    <svg class="w-4 h-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                    </svg>
+                                    Download
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            generateAssetCards();
+        });
+    </script>
+</body>
+</html>
