@@ -5,24 +5,19 @@ export default function Header() {
   return (
     <header className="bg-white shadow-sm border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-start h-24">
           {/* Logo Section */}
           <div className="flex items-center">
             <div className="flex-shrink-0">
               <img 
                 src={tungstenLogo} 
                 alt="TUNGSTEN" 
-                className="h-10 w-auto object-contain"
+                className="h-20 w-auto object-contain"
               />
             </div>
 
           </div>
-          
-          {/* User Info */}
-          <div className="flex items-center space-x-4">
 
-            <User className="w-5 h-5 professional-blue" />
-          </div>
         </div>
       </div>
     </header>
