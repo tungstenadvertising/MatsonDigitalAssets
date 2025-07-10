@@ -72,14 +72,22 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.setHeader('Content-Disposition', `attachment; filename="${asset.filename}"`);
       res.setHeader('Content-Type', 'image/png');
       
-      // In a real implementation, you would serve the actual file
-      // For now, we'll send a response indicating the download
-      res.json({ 
-        message: "Download initiated",
-        filename: asset.filename,
-        assetName: asset.name,
-        sourceImage: imageFile
-      });
+      // Serve the actual image file
+      const imagePath = path.join(__dirname, '../attached_assets', imageFile);
+      
+      // Check if file exists
+      if (fs.existsSync(imagePath)) {
+        // Send the actual image file
+        res.sendFile(path.resolve(imagePath));
+      } else {
+        // If file doesn't exist, return error
+        res.status(404).json({ 
+          message: "Image file not found",
+          filename: asset.filename,
+          assetName: asset.name,
+          expectedFile: imageFile
+        });
+      }
     } catch (error) {
       res.status(500).json({ message: "Failed to download asset" });
     }
