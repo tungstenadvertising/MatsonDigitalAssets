@@ -105,8 +105,8 @@ export default function AssetGroupCard({ group }: AssetGroupCardProps) {
       const asset = group.versions.find(v => v.id === assetId);
       setDownloadedStates(prev => ({ ...prev, [assetId]: true }));
       toast({
-        title: "Download Complete",
-        description: `${asset?.name} has been downloaded successfully.`,
+        title: "Download Started",
+        description: `${asset?.name} download has started.`,
       });
       setTimeout(() => {
         setDownloadedStates(prev => ({ ...prev, [assetId]: false }));
@@ -125,6 +125,11 @@ export default function AssetGroupCard({ group }: AssetGroupCardProps) {
   const handleDownload = (assetId: number) => {
     setDownloadingStates(prev => ({ ...prev, [assetId]: true }));
     downloadMutation.mutate(assetId);
+    
+    // Clear downloading state after a short delay since we can't detect when download completes
+    setTimeout(() => {
+      setDownloadingStates(prev => ({ ...prev, [assetId]: false }));
+    }, 1000);
   };
 
   const handleImageClick = (imageSrc: string, assetName: string, versionLabel: string) => {
