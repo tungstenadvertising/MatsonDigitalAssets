@@ -45,10 +45,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
         8: "Fichier 7_1752112713445.png", // With Text (Transparent)
         9: "Matson GPS Location_1752112713446.png", // With Text (Solid)
         
-        // Journey & Distance Tracker versions (placeholder until provided)
-        10: "placeholder-journey-icon.png",
-        11: "placeholder-journey-transparent.png",
-        12: "placeholder-journey-solid.png",
+        // Journey & Distance Tracker versions
+        10: "Fichier 5-1_1752112854438.png", // Icon Only
+        11: "Fichier 8_1752112854439.png", // With Text (Transparent)
+        12: "Matson Trip Mileage_1752112854439.png", // With Text (Solid)
         
         // Cargo Status Indicator versions (placeholder until provided)
         13: "placeholder-cargo-icon.png",
