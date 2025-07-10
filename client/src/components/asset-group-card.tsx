@@ -18,6 +18,9 @@ import gpsSolid from "@assets/Matson GPS Location_1752112713446.png";
 import journeyIcon from "@assets/Fichier 5-1_1752112854438.png";
 import journeyTransparent from "@assets/Fichier 8_1752112854439.png";
 import journeySolid from "@assets/Matson Trip Mileage_1752112854439.png";
+import cargoIcon from "@assets/Fichier 1_1752113164506.png";
+import cargoTransparent from "@assets/Fichier 12_1752113164506.png";
+import cargoSolid from "@assets/Loaded or Empty_1752113164506.png";
 
 interface DigitalAsset {
   id: number;
@@ -64,7 +67,7 @@ const assetImages: Record<string, string[]> = {
   "Internal Temperature Monitor": [tempIcon, tempTransparent, tempSolid],
   "GPS Location Tracker": [gpsIcon, gpsTransparent, gpsSolid],
   "Journey & Distance Tracker": [journeyIcon, journeyTransparent, journeySolid],
-  "Cargo Status Indicator": [], // Will be added when provided
+  "Cargo Status Indicator": [cargoIcon, cargoTransparent, cargoSolid],
   "Motion Alert System": [], // Will be added when provided
 };
 

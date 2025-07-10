@@ -50,10 +50,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
         11: "Fichier 8_1752112854439.png", // With Text (Transparent)
         12: "Matson Trip Mileage_1752112854439.png", // With Text (Solid)
         
-        // Cargo Status Indicator versions (placeholder until provided)
-        13: "placeholder-cargo-icon.png",
-        14: "placeholder-cargo-transparent.png",
-        15: "placeholder-cargo-solid.png",
+        // Cargo Status Indicator versions
+        13: "Fichier 1_1752113164506.png", // Icon Only
+        14: "Fichier 12_1752113164506.png", // With Text (Transparent)
+        15: "Loaded or Empty_1752113164506.png", // With Text (Solid)
         
         // Motion Alert System versions (placeholder until provided)
         16: "placeholder-motion-icon.png",
