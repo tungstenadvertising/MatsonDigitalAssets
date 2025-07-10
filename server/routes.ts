@@ -31,9 +31,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Map asset IDs to their actual image files
       const assetImages: Record<number, string> = {
         // Door Status Indicator versions
-        1: "Fichier 2-1_1752112488898.png", // Icon Only
-        2: "Fichier 2_1752112488898.png", // With Text (Transparent)
-        3: "Door status_1752112488898.png", // With Text (Solid)
+        1: "Fichier 2_1752113567375.png", // Icon Only
+        2: "Fichier 11_1752113567375.png", // With Text (Transparent)
+        3: "Door status_1752113567375.png", // With Text (Solid)
         
         // Internal Temperature Monitor versions
         4: "Fichier 3-1_1752111955845.png", // Icon Only

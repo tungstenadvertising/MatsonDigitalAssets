@@ -6,9 +6,9 @@ import { Download, CheckCircle, DoorOpen, Thermometer, MapPin, Route, Package, A
 import { useState } from "react";
 
 // Import actual asset images
-import doorStatusIcon from "@assets/Fichier 2-1_1752112488898.png";
-import doorStatusTransparent from "@assets/Fichier 2_1752112488898.png"; 
-import doorStatusSolid from "@assets/Door status_1752112488898.png";
+import doorStatusIcon from "@assets/Fichier 2_1752113567375.png";
+import doorStatusTransparent from "@assets/Fichier 11_1752113567375.png"; 
+import doorStatusSolid from "@assets/Door status_1752113567375.png";
 import tempIcon from "@assets/Fichier 3-1_1752111955845.png";
 import tempTransparent from "@assets/Fichier 10_1752111955845.png";
 import tempSolid from "@assets/Internal Temperature_1752111955845.png";
