@@ -12,6 +12,9 @@ import doorStatusSolid from "@assets/Door status_1752112488898.png";
 import tempIcon from "@assets/Fichier 3-1_1752111955845.png";
 import tempTransparent from "@assets/Fichier 10_1752111955845.png";
 import tempSolid from "@assets/Internal Temperature_1752111955845.png";
+import gpsIcon from "@assets/Fichier 6_1752112713446.png";
+import gpsTransparent from "@assets/Fichier 7_1752112713445.png";
+import gpsSolid from "@assets/Matson GPS Location_1752112713446.png";
 
 interface DigitalAsset {
   id: number;
@@ -56,7 +59,7 @@ const versionLabels = [
 const assetImages: Record<string, string[]> = {
   "Door Status Indicator": [doorStatusIcon, doorStatusTransparent, doorStatusSolid],
   "Internal Temperature Monitor": [tempIcon, tempTransparent, tempSolid],
-  "GPS Location Tracker": [], // Will be added when provided
+  "GPS Location Tracker": [gpsIcon, gpsTransparent, gpsSolid],
   "Journey & Distance Tracker": [], // Will be added when provided
   "Cargo Status Indicator": [], // Will be added when provided
   "Motion Alert System": [], // Will be added when provided
