@@ -5,6 +5,14 @@ import { Button } from "@/components/ui/button";
 import { Download, CheckCircle, DoorOpen, Thermometer, MapPin, Route, Package, ArrowLeftRight } from "lucide-react";
 import { useState } from "react";
 
+// Import actual asset images
+import doorStatusIcon from "@assets/Fichier 2-1_1752112488898.png";
+import doorStatusTransparent from "@assets/Fichier 2_1752112488898.png"; 
+import doorStatusSolid from "@assets/Door status_1752112488898.png";
+import tempIcon from "@assets/Fichier 3-1_1752111955845.png";
+import tempTransparent from "@assets/Fichier 10_1752111955845.png";
+import tempSolid from "@assets/Internal Temperature_1752111955845.png";
+
 interface DigitalAsset {
   id: number;
   name: string;
@@ -43,6 +51,16 @@ const versionLabels = [
   { label: "With Text (Transparent)", description: "Text on transparent background" },
   { label: "With Text (Solid)", description: "Text on solid background" }
 ];
+
+// Asset image mapping
+const assetImages: Record<string, string[]> = {
+  "Door Status Indicator": [doorStatusIcon, doorStatusTransparent, doorStatusSolid],
+  "Internal Temperature Monitor": [tempIcon, tempTransparent, tempSolid],
+  "GPS Location Tracker": [], // Will be added when provided
+  "Journey & Distance Tracker": [], // Will be added when provided
+  "Cargo Status Indicator": [], // Will be added when provided
+  "Motion Alert System": [], // Will be added when provided
+};
 
 export default function AssetGroupCard({ group }: AssetGroupCardProps) {
   const { toast } = useToast();
@@ -108,8 +126,16 @@ export default function AssetGroupCard({ group }: AssetGroupCardProps) {
           return (
             <div key={version.id} className="border border-gray-200 rounded-lg p-4 bg-gray-50">
               <div className="text-center mb-3">
-                <div className="w-12 h-12 bg-gray-300 rounded-lg flex items-center justify-center mx-auto mb-2">
-                  <IconComponent className="w-6 h-6 text-gray-600" />
+                <div className="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-2 overflow-hidden">
+                  {assetImages[group.baseName]?.[index] ? (
+                    <img 
+                      src={assetImages[group.baseName][index]} 
+                      alt={`${group.baseName} - ${versionLabels[index]?.label}`}
+                      className="w-full h-full object-contain"
+                    />
+                  ) : (
+                    <IconComponent className="w-6 h-6 text-gray-600" />
+                  )}
                 </div>
                 <h4 className="text-sm font-medium text-gray-800 mb-1">
                   {versionLabels[index]?.label || `Version ${index + 1}`}

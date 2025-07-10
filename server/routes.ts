@@ -28,18 +28,40 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(404).json({ message: "Asset not found" });
       }
 
-      // In a real implementation, this would serve the actual file
-      // For now, we'll create a mock PNG file response
-      const assetImages = {
-        1: "PastedGraphic-5_1752023080506.png", // Door Status -> Door graphic
-        2: "PastedGraphic-3_1752023080506.png", // Internal Temp -> Temperature graphic
-        3: "PastedGraphic-1-2_1752023080506.png", // GPS Location -> GPS graphic
-        4: "PastedGraphic-2-1_1752023080506.png", // Trip Mileage -> Trip graphic
-        5: "PastedGraphic-6_1752023080506.png", // Cargo Status -> Loaded/Empty graphic
-        6: "PastedGraphic-4_1752023080506.png", // Motion Alert -> Motion graphic
+      // Map asset IDs to their actual image files
+      const assetImages: Record<number, string> = {
+        // Door Status Indicator versions
+        1: "Fichier 2-1_1752112488898.png", // Icon Only
+        2: "Fichier 2_1752112488898.png", // With Text (Transparent)
+        3: "Door status_1752112488898.png", // With Text (Solid)
+        
+        // Internal Temperature Monitor versions
+        4: "Fichier 3-1_1752111955845.png", // Icon Only
+        5: "Fichier 10_1752111955845.png", // With Text (Transparent)
+        6: "Internal Temperature_1752111955845.png", // With Text (Solid)
+        
+        // GPS Location Tracker versions (placeholder until provided)
+        7: "placeholder-gps-icon.png",
+        8: "placeholder-gps-transparent.png", 
+        9: "placeholder-gps-solid.png",
+        
+        // Journey & Distance Tracker versions (placeholder until provided)
+        10: "placeholder-journey-icon.png",
+        11: "placeholder-journey-transparent.png",
+        12: "placeholder-journey-solid.png",
+        
+        // Cargo Status Indicator versions (placeholder until provided)
+        13: "placeholder-cargo-icon.png",
+        14: "placeholder-cargo-transparent.png",
+        15: "placeholder-cargo-solid.png",
+        
+        // Motion Alert System versions (placeholder until provided)
+        16: "placeholder-motion-icon.png",
+        17: "placeholder-motion-transparent.png",
+        18: "placeholder-motion-solid.png",
       };
 
-      const imageFile = assetImages[assetId as keyof typeof assetImages];
+      const imageFile = assetImages[assetId];
       if (!imageFile) {
         return res.status(404).json({ message: "Asset file not found" });
       }
