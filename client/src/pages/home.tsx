@@ -63,7 +63,16 @@ export default function Home() {
 
   const downloadAllMutation = useMutation({
     mutationFn: async () => {
-      return apiRequest("GET", "/api/digital-assets/download-all");
+      // Create a temporary link to trigger download
+      const link = document.createElement('a');
+      link.href = '/api/digital-assets/download-all';
+      link.download = 'matson-digital-assets.zip';
+      link.style.display = 'none';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      
+      return { success: true };
     },
     onSuccess: () => {
       toast({

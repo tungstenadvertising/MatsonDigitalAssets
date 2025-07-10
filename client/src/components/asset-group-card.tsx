@@ -90,7 +90,16 @@ export default function AssetGroupCard({ group }: AssetGroupCardProps) {
 
   const downloadMutation = useMutation({
     mutationFn: async (assetId: number) => {
-      return apiRequest("GET", `/api/digital-assets/${assetId}/download`);
+      // Create a temporary link to trigger download
+      const link = document.createElement('a');
+      link.href = `/api/digital-assets/${assetId}/download`;
+      link.download = ''; // Let the server determine the filename
+      link.style.display = 'none';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      
+      return { success: true };
     },
     onSuccess: (data, assetId) => {
       const asset = group.versions.find(v => v.id === assetId);
