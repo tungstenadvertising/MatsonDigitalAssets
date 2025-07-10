@@ -109,3 +109,6 @@ Preferred communication style: Simple, everyday language.
 - **Download Mapping**: Updated server routes to serve correct image files for each asset
 - **UI Enhancement**: AssetGroupCard component displays actual asset previews
 - **Asset Categories**: Door Status, Internal Temperature, GPS Location, Journey & Distance, Cargo Status, Motion Alert
+- **Logo Enhancement**: Increased logo size by 40% (h-44) with proper header spacing (h-48)
+- **Image Overlay Modal**: Added clickable thumbnails that display full-size asset previews with overlay
+- **Download Verification**: Confirmed both individual and bulk download functionality working correctly
