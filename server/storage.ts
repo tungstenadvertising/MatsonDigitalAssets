@@ -26,62 +26,67 @@ export class MemStorage implements IStorage {
   }
 
   private initializeAssets() {
-    const assets: InsertDigitalAsset[] = [
+    const baseAssets = [
       {
         name: "Door Status Indicator",
         description: "Visual indicator showing container door status with real-time monitoring capabilities. Perfect for operational dashboards and status reports.",
-        filename: "door-status.png",
-        fileFormat: "PNG",
-        dimensions: "1024x1024px",
         iconName: "door-open",
         category: "operational"
       },
       {
         name: "Internal Temperature Monitor",
         description: "Temperature monitoring system graphic for cold chain logistics presentations. Ideal for refrigerated cargo tracking slides.",
-        filename: "internal-temp.png",
-        fileFormat: "PNG",
-        dimensions: "1024x1024px",
         iconName: "thermometer-half",
         category: "monitoring"
       },
       {
         name: "GPS Location Tracker",
         description: "Real-time GPS tracking visualization for cargo location monitoring. Essential for supply chain visibility presentations.",
-        filename: "gps-location.png",
-        fileFormat: "PNG",
-        dimensions: "1024x1024px",
         iconName: "map-marker-alt",
         category: "tracking"
       },
       {
         name: "Journey & Distance Tracker",
         description: "Mileage and distance calculation display for route optimization presentations. Perfect for logistics efficiency reports.",
-        filename: "trip-mileage.png",
-        fileFormat: "PNG",
-        dimensions: "1024x1024px",
         iconName: "route",
         category: "optimization"
       },
       {
         name: "Cargo Status Indicator",
         description: "Load status visualization showing loaded or empty container states. Essential for capacity management presentations.",
-        filename: "cargo-status.png",
-        fileFormat: "PNG",
-        dimensions: "1024x1024px",
         iconName: "boxes",
         category: "capacity"
       },
       {
         name: "Motion Alert System",
         description: "Movement detection and alert system visualization for security and monitoring presentations. Ideal for safety protocol slides.",
-        filename: "motion-alert.png",
-        fileFormat: "PNG",
-        dimensions: "1024x1024px",
         iconName: "exchange-alt",
         category: "security"
       }
     ];
+
+    const versions = [
+      { suffix: "Icon Only", description: "Icon only (no text, transparent background)" },
+      { suffix: "With Text (Transparent)", description: "Icon with text on transparent background" },
+      { suffix: "With Text (Solid Background)", description: "Icon with text on solid background" }
+    ];
+
+    const assets: InsertDigitalAsset[] = [];
+    
+    baseAssets.forEach(baseAsset => {
+      versions.forEach((version, versionIndex) => {
+        const assetName = baseAsset.name.toLowerCase().replace(/\s+/g, '-');
+        assets.push({
+          name: `${baseAsset.name} - ${version.suffix}`,
+          description: `${baseAsset.description} ${version.description}`,
+          filename: `${assetName}-v${versionIndex + 1}.png`,
+          fileFormat: "PNG",
+          dimensions: "1024x1024px",
+          iconName: baseAsset.iconName,
+          category: baseAsset.category
+        });
+      });
+    });
 
     assets.forEach(asset => {
       const id = this.currentAssetId++;

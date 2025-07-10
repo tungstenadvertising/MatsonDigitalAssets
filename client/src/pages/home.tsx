@@ -4,9 +4,11 @@ import { useToast } from "@/hooks/use-toast";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import AssetCard from "@/components/asset-card";
+import AssetGroupCard from "@/components/asset-group-card";
 import { Button } from "@/components/ui/button";
-import { Download, CheckCircle } from "lucide-react";
+import { Download, CheckCircle, Package, DoorOpen, Thermometer, MapPin, Route, ArrowLeftRight } from "lucide-react";
 import { useState } from "react";
+import React from "react";
 
 interface DigitalAsset {
   id: number;
@@ -20,6 +22,14 @@ interface DigitalAsset {
   isActive: boolean;
 }
 
+interface AssetGroup {
+  baseName: string;
+  description: string;
+  iconName: string;
+  category: string;
+  versions: DigitalAsset[];
+}
+
 export default function Home() {
   const { toast } = useToast();
   const [downloadingAll, setDownloadingAll] = useState(false);
@@ -27,6 +37,29 @@ export default function Home() {
   const { data: assets, isLoading } = useQuery<DigitalAsset[]>({
     queryKey: ["/api/digital-assets"],
   });
+
+  // Group assets by base name
+  const assetGroups: AssetGroup[] = React.useMemo(() => {
+    if (!assets) return [];
+    
+    const groups: Record<string, AssetGroup> = {};
+    
+    assets.forEach(asset => {
+      const baseName = asset.name.split(' - ')[0];
+      if (!groups[baseName]) {
+        groups[baseName] = {
+          baseName,
+          description: asset.description.split(' Icon only')[0].split(' Icon with text')[0],
+          iconName: asset.iconName,
+          category: asset.category,
+          versions: []
+        };
+      }
+      groups[baseName].versions.push(asset);
+    });
+    
+    return Object.values(groups);
+  }, [assets]);
 
   const downloadAllMutation = useMutation({
     mutationFn: async () => {
@@ -121,9 +154,9 @@ export default function Home() {
         </div>
 
         {/* Assets Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {assets?.map((asset) => (
-            <AssetCard key={asset.id} asset={asset} />
+        <div className="grid grid-cols-1 gap-8">
+          {assetGroups.map((group) => (
+            <AssetGroupCard key={group.baseName} group={group} />
           ))}
         </div>
 
