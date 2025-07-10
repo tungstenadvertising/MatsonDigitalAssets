@@ -90,6 +90,9 @@ export default function AssetGroupCard({ group }: AssetGroupCardProps) {
 
   const downloadMutation = useMutation({
     mutationFn: async (assetId: number) => {
+      // Add a small delay to allow downloading state to show
+      await new Promise(resolve => setTimeout(resolve, 500));
+      
       // Create a temporary link to trigger download
       const link = document.createElement('a');
       link.href = `/api/digital-assets/${assetId}/download`;
@@ -103,17 +106,25 @@ export default function AssetGroupCard({ group }: AssetGroupCardProps) {
     },
     onSuccess: (data, assetId) => {
       const asset = group.versions.find(v => v.id === assetId);
-      setDownloadedStates(prev => ({ ...prev, [assetId]: true }));
-      toast({
-        title: "Download Started",
-        description: `${asset?.name} download has started.`,
-      });
+      
+      // Show completed state after a brief delay
       setTimeout(() => {
-        setDownloadedStates(prev => ({ ...prev, [assetId]: false }));
-      }, 2000);
+        setDownloadingStates(prev => ({ ...prev, [assetId]: false }));
+        setDownloadedStates(prev => ({ ...prev, [assetId]: true }));
+        toast({
+          title: "Download Started",
+          description: `${asset?.name} download has started.`,
+        });
+        
+        // Reset completed state after 2 seconds
+        setTimeout(() => {
+          setDownloadedStates(prev => ({ ...prev, [assetId]: false }));
+        }, 2000);
+      }, 200);
     },
     onError: (error, assetId) => {
       const asset = group.versions.find(v => v.id === assetId);
+      setDownloadingStates(prev => ({ ...prev, [assetId]: false }));
       toast({
         title: "Download Failed",
         description: `Failed to download ${asset?.name}. Please try again.`,
@@ -125,11 +136,6 @@ export default function AssetGroupCard({ group }: AssetGroupCardProps) {
   const handleDownload = (assetId: number) => {
     setDownloadingStates(prev => ({ ...prev, [assetId]: true }));
     downloadMutation.mutate(assetId);
-    
-    // Clear downloading state after a short delay since we can't detect when download completes
-    setTimeout(() => {
-      setDownloadingStates(prev => ({ ...prev, [assetId]: false }));
-    }, 1000);
   };
 
   const handleImageClick = (imageSrc: string, assetName: string, versionLabel: string) => {
