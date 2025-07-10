@@ -21,6 +21,9 @@ import journeySolid from "@assets/Matson Trip Mileage_1752112854439.png";
 import cargoIcon from "@assets/Fichier 1_1752113164506.png";
 import cargoTransparent from "@assets/Fichier 12_1752113164506.png";
 import cargoSolid from "@assets/Loaded or Empty_1752113164506.png";
+import motionIcon from "@assets/Fichier 4_1752113313600.png";
+import motionTransparent from "@assets/Fichier 9_1752113313600.png";
+import motionSolid from "@assets/Motion Alert_1752113313600.png";
 
 interface DigitalAsset {
   id: number;
@@ -68,7 +71,7 @@ const assetImages: Record<string, string[]> = {
   "GPS Location Tracker": [gpsIcon, gpsTransparent, gpsSolid],
   "Journey & Distance Tracker": [journeyIcon, journeyTransparent, journeySolid],
   "Cargo Status Indicator": [cargoIcon, cargoTransparent, cargoSolid],
-  "Motion Alert System": [], // Will be added when provided
+  "Motion Alert System": [motionIcon, motionTransparent, motionSolid],
 };
 
 export default function AssetGroupCard({ group }: AssetGroupCardProps) {

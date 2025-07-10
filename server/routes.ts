@@ -55,10 +55,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
         14: "Fichier 12_1752113164506.png", // With Text (Transparent)
         15: "Loaded or Empty_1752113164506.png", // With Text (Solid)
         
-        // Motion Alert System versions (placeholder until provided)
-        16: "placeholder-motion-icon.png",
-        17: "placeholder-motion-transparent.png",
-        18: "placeholder-motion-solid.png",
+        // Motion Alert System versions
+        16: "Fichier 4_1752113313600.png", // Icon Only
+        17: "Fichier 9_1752113313600.png", // With Text (Transparent)
+        18: "Motion Alert_1752113313600.png", // With Text (Solid)
       };
 
       const imageFile = assetImages[assetId];

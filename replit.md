@@ -94,7 +94,18 @@ Preferred communication style: Simple, everyday language.
 
 ### Key Features
 - **Corporate Branding**: Custom CSS variables for Matson Logistics colors
-- **Mock Asset System**: Pre-populated with 6 logistics-related digital assets
+- **Complete Asset Library**: 6 digital asset groups with 3 versions each (18 total assets)
+- **Real Image Assets**: All assets use actual provided images instead of placeholders
+- **Asset Group Display**: AssetGroupCard component shows all three versions per asset
+- **Individual Downloads**: Each asset version can be downloaded separately
+- **Bulk Download**: Download all 18 assets at once
 - **Responsive Design**: Mobile-first approach with corporate styling
 - **Type Safety**: Full TypeScript implementation across frontend and backend
 - **Development Experience**: Hot reload, error overlays, and development tooling
+
+### Recent Changes (January 2025)
+- **Complete Asset Integration**: Added all 18 real asset images across 6 categories
+- **Asset Group System**: Implemented three-version display (Icon Only, With Text Transparent, With Text Solid)
+- **Download Mapping**: Updated server routes to serve correct image files for each asset
+- **UI Enhancement**: AssetGroupCard component displays actual asset previews
+- **Asset Categories**: Door Status, Internal Temperature, GPS Location, Journey & Distance, Cargo Status, Motion Alert
