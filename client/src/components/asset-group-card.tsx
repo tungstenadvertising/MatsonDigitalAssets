@@ -4,6 +4,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Download, CheckCircle, DoorOpen, Thermometer, MapPin, Route, Package, ArrowLeftRight } from "lucide-react";
 import { useState } from "react";
+import ImageOverlay from "./image-overlay";
 
 // Import actual asset images
 import doorStatusIcon from "@assets/Fichier 2_1752113567375.png";
@@ -78,6 +79,12 @@ export default function AssetGroupCard({ group }: AssetGroupCardProps) {
   const { toast } = useToast();
   const [downloadingStates, setDownloadingStates] = useState<Record<number, boolean>>({});
   const [downloadedStates, setDownloadedStates] = useState<Record<number, boolean>>({});
+  const [overlayImage, setOverlayImage] = useState<{
+    src: string;
+    alt: string;
+    assetName: string;
+    versionLabel: string;
+  } | null>(null);
 
   const IconComponent = iconMap[group.iconName as keyof typeof iconMap] || Package;
 
@@ -111,6 +118,19 @@ export default function AssetGroupCard({ group }: AssetGroupCardProps) {
     downloadMutation.mutate(assetId);
   };
 
+  const handleImageClick = (imageSrc: string, assetName: string, versionLabel: string) => {
+    setOverlayImage({
+      src: imageSrc,
+      alt: `${assetName} - ${versionLabel}`,
+      assetName,
+      versionLabel
+    });
+  };
+
+  const closeOverlay = () => {
+    setOverlayImage(null);
+  };
+
   return (
     <div className="bg-white rounded-lg shadow-md border border-gray-200 p-6 hover:shadow-lg transition-shadow duration-200">
       <div className="flex items-start space-x-4 mb-6">
@@ -138,7 +158,18 @@ export default function AssetGroupCard({ group }: AssetGroupCardProps) {
           return (
             <div key={version.id} className="border border-gray-200 rounded-lg p-4 bg-gray-50">
               <div className="text-center mb-3">
-                <div className="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-2 overflow-hidden">
+                <div 
+                  className="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-2 overflow-hidden cursor-pointer hover:bg-gray-200 transition-colors"
+                  onClick={() => {
+                    if (assetImages[group.baseName]?.[index]) {
+                      handleImageClick(
+                        assetImages[group.baseName][index],
+                        group.baseName,
+                        versionLabels[index]?.label || `Version ${index + 1}`
+                      );
+                    }
+                  }}
+                >
                   {assetImages[group.baseName]?.[index] ? (
                     <img 
                       src={assetImages[group.baseName][index]} 
@@ -192,6 +223,18 @@ export default function AssetGroupCard({ group }: AssetGroupCardProps) {
           );
         })}
       </div>
+
+      {/* Image Overlay */}
+      {overlayImage && (
+        <ImageOverlay
+          isOpen={!!overlayImage}
+          onClose={closeOverlay}
+          imageSrc={overlayImage.src}
+          imageAlt={overlayImage.alt}
+          assetName={overlayImage.assetName}
+          versionLabel={overlayImage.versionLabel}
+        />
+      )}
     </div>
   );
 }
