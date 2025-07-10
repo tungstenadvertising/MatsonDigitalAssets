@@ -73,7 +73,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.setHeader('Content-Type', 'image/png');
       
       // Serve the actual image file
-      const imagePath = path.join(__dirname, '../attached_assets', imageFile);
+      const imagePath = path.join(process.cwd(), 'attached_assets', imageFile);
       
       // Check if file exists
       if (fs.existsSync(imagePath)) {
@@ -85,7 +85,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
           message: "Image file not found",
           filename: asset.filename,
           assetName: asset.name,
-          expectedFile: imageFile
+          expectedFile: imageFile,
+          searchPath: imagePath
         });
       }
     } catch (error) {
@@ -161,7 +162,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         for (const asset of folderAssets) {
           const imageFile = assetImages[asset.id];
           if (imageFile) {
-            const imagePath = path.join(__dirname, '../attached_assets', imageFile);
+            const imagePath = path.join(process.cwd(), 'attached_assets', imageFile);
             
             // Check if file exists, if not use placeholder
             if (fs.existsSync(imagePath)) {
